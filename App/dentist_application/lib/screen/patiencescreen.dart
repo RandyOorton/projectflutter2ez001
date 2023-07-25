@@ -15,10 +15,10 @@ class _PatienceScreenState extends State<PatienceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("ข้อมูลคนไข้"),
+          title: const Text("ข้อมูลคนไข้"),
           actions: [
             IconButton(
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.add),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return SecondScreen();

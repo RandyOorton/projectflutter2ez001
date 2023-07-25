@@ -12,7 +12,7 @@ class _FormScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("หน้าโปรไฟล์"),
+        title: const Text("หน้าโปรไฟล์"),
         ),
     );
   }

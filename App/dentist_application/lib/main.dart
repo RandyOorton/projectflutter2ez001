@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   
   @override
   Widget build(BuildContext context) {
-      return DefaultTabController(
+      return const DefaultTabController(
         length: 2,
         child: Scaffold(
           body: TabBarView(
@@ -53,6 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
               ),
         ),
-        );
+      );
   }
 }
