@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import '../../model/patiencedata.dart';
+import '../../model/patientdata.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -10,8 +12,11 @@ class SecondScreen extends StatefulWidget {
 class _SecondScreenState extends State<SecondScreen> {
 
   final formKey = GlobalKey<FormState>();
-  Patience myPatience = Patience();
-  
+  Patient myPatient = Patient();
+  final Future<FirebaseApp> firebase = Firebase.initializeApp();
+  final fnameController = Patient();
+  final lnameController = Patient();
+  CollectionReference patientcollection = FirebaseFirestore.instance.collection("patients");
   
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class _SecondScreenState extends State<SecondScreen> {
                   TextFormField(
                     validator: RequiredValidator(errorText: "กรุณาป้อนชื่อด้วยง้บ ^^"),
                     onSaved: (fname){
-                      myPatience.fname = fname.toString();
+                      myPatient.fname = fname.toString();
                     },
                   ),
                   const SizedBox(
@@ -46,17 +51,20 @@ class _SecondScreenState extends State<SecondScreen> {
                   TextFormField(
                     validator: RequiredValidator(errorText: "กรุณาป้อนนามสกุลด้วยง้บ T-T"),
                     onSaved: (lname){
-                      myPatience.lname = lname.toString();
+                      myPatient.lname = lname.toString();
                     },
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async{
                           if(formKey.currentState!.validate()){
                             formKey.currentState!.save();
-                            print("${myPatience.fname}");
-                            print("${myPatience.lname}");
+                            await patientcollection.add({
+                              "fname":myPatient.fname,
+                              "lname":myPatient.lname
+                            });
+                            formKey.currentState!.reset();
                           }
                       },
                       child: const Text("บันทึกข้อมูล",style: TextStyle(fontSize: 20),)

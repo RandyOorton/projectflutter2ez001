@@ -1,8 +1,14 @@
-import 'package:dentist_application/screen/patiencescreen.dart';
+import 'package:dentist_application/firebase_options.dart';
+import 'package:dentist_application/screen/patientscreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'screen/profilescreen.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 
@@ -42,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           body: TabBarView(
             children: [
               ProfileScreen(),
-              PatienceScreen()
+              PatientScreen()
             ],
             ),
             backgroundColor: Colors.blue,
