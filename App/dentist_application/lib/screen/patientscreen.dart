@@ -1,8 +1,9 @@
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dentist_application/model/patientdata.dart';
 import 'package:dentist_application/screen/secondScreen/Addscreen.dart';
 import 'package:flutter/material.dart';
+import 'secondScreen/detailpage.dart';
 
 
 
@@ -35,19 +36,28 @@ class _PatientScreenState extends State<PatientScreen> {
             if(!snapshot.hasData){
               return const Center(child: CircularProgressIndicator(),);
             }
-            return ListView(
-                children: snapshot.data!.docs.map((document){
-                  return Card(
-                    margin: const EdgeInsets.symmetric(horizontal:5),
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index){
+                final DocumentSnapshot patientSnapshot = 
+                    snapshot.data!.docs[index];
+                return Card(
+                    margin: const EdgeInsets.symmetric(horizontal:5,vertical: 3),
                     child: ListTile(
-                      title: Text(document["fname"]+" "+document["lname"]),
+                      title: Text(patientSnapshot["fname"]+" "+patientSnapshot["lname"]),
                       onTap: () {
-                        
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailPage(patientData:patientSnapshot),
+                          ),
+                        );
                       },
                     ),
                     
                   );
-                }).toList(),
+
+              },
             );
           },
         ),
