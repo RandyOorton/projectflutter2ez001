@@ -19,7 +19,7 @@ class _DetailPageState extends State<DetailPage> {
     String lname = widget.patientData['lname'];
     return Scaffold(
       appBar: AppBar(
-        title: Text('$fname' + ' ' + '$lname'),
+        title: Text('$fname' ' ' '$lname'),
         actions: [
           IconButton(
               icon: const Icon(Icons.add_photo_alternate),
@@ -58,8 +58,8 @@ void showImagePicker(BuildContext context) {
                 children: [
                   Expanded(
                       child: InkWell(
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Icon(
                           Icons.image,
                           size: 60.0,
@@ -79,9 +79,9 @@ void showImagePicker(BuildContext context) {
                   )),
                   Expanded(
                       child: InkWell(
-                    child: SizedBox(
+                    child: const SizedBox(
                       child: Column(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.camera_alt,
                             size: 60.0,

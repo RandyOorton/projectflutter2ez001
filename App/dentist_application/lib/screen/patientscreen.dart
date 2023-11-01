@@ -15,7 +15,7 @@ class _PatientScreenState extends State<PatientScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ข้อมูลคนไข้"),
+        title: const Text("รายชื่อคนไข้"),
         actions: [
           IconButton(
               icon: const Icon(Icons.add),
@@ -26,7 +26,11 @@ class _PatientScreenState extends State<PatientScreen> {
               })
         ],
       ),
-      body: StreamBuilder(
+
+      body:
+
+      
+       StreamBuilder(
         stream: FirebaseFirestore.instance.collection("patients").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
@@ -60,6 +64,8 @@ class _PatientScreenState extends State<PatientScreen> {
           );
         },
       ),
+      
+    
     );
   }
 }
