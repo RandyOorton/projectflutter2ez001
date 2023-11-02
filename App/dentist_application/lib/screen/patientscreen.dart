@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'secondScreen/detailpage.dart';
 
 class PatientScreen extends StatefulWidget {
-  const PatientScreen({super.key});
+  
+  late String img;
+  PatientScreen(this.img);
 
   @override
   State<PatientScreen> createState() => _PatientScreenState();

@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:dentist_application/colors.dart';
-import 'package:dentist_application/screen/secondScreen/option_Section.dart';
+import 'package:dentist_application/screen/patientscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+  
 
   @override
   State<ProfileScreen> createState() => _FormScreenState();
@@ -14,6 +15,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _FormScreenState extends State<ProfileScreen> {
   File? imageFile;
+  List imgList = [
+    'Patient',
+    'About',
+    'News',
+    'Profile',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +54,7 @@ class _FormScreenState extends State<ProfileScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
+                              const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -120,7 +127,54 @@ class _FormScreenState extends State<ProfileScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: bColor.withOpacity(0.7),
                               ))),
-                              OptionsSection(),
+                      GridView.builder(
+                        itemCount: imgList.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio:
+                              (MediaQuery.of(context).size.height - 50 - 25) /
+                                  (4 * 240),
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => PatientScreen(imgList[index]),
+                                ));
+                              },
+                              child: Container(
+                                  padding: EdgeInsets.symmetric(vertical:20,horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Color(0xFFF5F3FF),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Image.asset("assets/${imgList[index]}.png",
+                                        width: 100,
+                                        height: 100,
+                                        ),
+                                        ),
+                                        SizedBox(height: 30,),
+                                        Text(
+                                          imgList[index],
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black,
+                                          )),
+                                    ],
+                                  )));
+                        },
+                      )
+
+                      //OptionsSection(),
                     ],
                   )),
             ],

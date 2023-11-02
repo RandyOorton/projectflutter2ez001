@@ -1,5 +1,4 @@
 import 'package:dentist_application/firebase_options.dart';
-import 'package:dentist_application/screen/patientscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'screen/profilescreen.dart';
